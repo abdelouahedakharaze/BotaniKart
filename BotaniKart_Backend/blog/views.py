@@ -1,58 +1,85 @@
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
-from .models import Article, Comment, Like
-from .serializers import ArticleSerializer, CommentSerializer, LikeSerializer
+from rest_framework import generics, permissions, filters
+from rest_framework.exceptions import PermissionDenied
+from django.utils import timezone
+from .models import Post, Category, Tag, Comment
+from .serializers import PostSerializer, CategorySerializer, TagSerializer, CommentSerializer
+from .permissions import IsAuthorOrReadOnly
 
-class IsAuthorOrReadOnly(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.author == request.user
-
-class ArticleList(generics.ListCreateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'content']
+    ordering_fields = ['created_at', 'updated_at', 'published_at']
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        if self.request.user.is_authenticated:
+            return queryset
+        return queryset.filter(is_published=True, published_at__lte=timezone.now())
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     permission_classes = [IsAuthorOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        if self.request.user.is_authenticated:
+            return queryset
+        return queryset.filter(is_published=True, published_at__lte=timezone.now())
+
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class TagList(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class TagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return Comment.objects.filter(article_id=self.kwargs['article_id'])
+        post_id = self.kwargs['post_id']
+        return Comment.objects.filter(post_id=post_id, is_approved=True)
 
     def perform_create(self, serializer):
-        article = Article.objects.get(pk=self.kwargs['article_id'])
-        serializer.save(author=self.request.user, article=article)
+        post_id = self.kwargs['post_id']
+        post = Post.objects.get(id=post_id)
+        serializer.save(author=self.request.user, post=post)
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthorOrReadOnly]
 
-class LikeArticle(generics.CreateAPIView, generics.DestroyAPIView):
-    serializer_class = LikeSerializer
+    def get_object(self):
+        obj = super().get_object()
+        if not obj.is_approved and self.request.user != obj.author and not self.request.user.is_staff:
+            raise PermissionDenied("This comment is not approved yet.")
+        return obj
+
+class UserPostList(generics.ListAPIView):
+    serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Like.objects.filter(article_id=self.kwargs['article_id'], user=self.request.user)
-
-    def create(self, request, *args, **kwargs):
-        article = Article.objects.get(pk=self.kwargs['article_id'])
-        like, created = Like.objects.get_or_create(user=request.user, article=article)
-        if created:
-            return Response({'status': 'liked'}, status=status.HTTP_201_CREATED)
-        return Response({'status': 'already liked'}, status=status.HTTP_200_OK)
-
-    def delete(self, request, *args, **kwargs):
-        article = Article.objects.get(pk=self.kwargs['article_id'])
-        Like.objects.filter(user=request.user, article=article).delete()
-        return Response({'status': 'unliked'}, status=status.HTTP_204_NO_CONTENT)
+        return Post.objects.filter(author=self.request.user)
