@@ -1,23 +1,29 @@
 from rest_framework import serializers
-from .models import CartItem
-from products.serializers import ProductSerializer
-from products.models import Product
+from .models import Cart, CartItem
+from products.serializers import ProductSKUSerializer
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
-    product_id = serializers.IntegerField(write_only=True)
+    product_sku = ProductSKUSerializer(read_only=True)
+    subtotal = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
 
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'product_id', 'quantity', 'added_at']
-        read_only_fields = ['id', 'added_at']
+        fields = ['id', 'product_sku', 'quantity', 'subtotal']
 
-    def create(self, validated_data):
-        user = self.context['request'].user
-        product_id = validated_data.pop('product_id')
-        product = Product.objects.get(id=product_id)
-        cart_item, created = CartItem.objects.get_or_create(user=user, product=product, defaults=validated_data)
-        if not created:
-            cart_item.quantity += validated_data.get('quantity', 1)
-            cart_item.save()
-        return cart_item
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['subtotal'] = instance.subtotal()
+        return representation
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+    total_price = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'items', 'total_price', 'created_at', 'updated_at']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['total_price'] = instance.total_price()
+        return representation
