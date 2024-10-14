@@ -1,23 +1,21 @@
-import React from 'react';
+import React from 'react'
+import Header from './Header'
+import Footer from './Footer'
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
-      <header>
-        <h1>BotaniKart</h1>
-      </header>
-      <main>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow container mx-auto px-4 py-8">
         {children}
       </main>
-      <footer>
-        <p>&copy; 2023 BotaniKart</p>
-      </footer>
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
