@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductList from '../components/products/ProductList'
+// import ProductList from '../components/products/ProductList'
 import { useAnalytics } from '../hooks/useAnalytics'
 
 const Home: React.FC = () => {
@@ -10,7 +10,7 @@ const Home: React.FC = () => {
       <h1 className="text-4xl font-bold text-primary mb-8">Welcome to Botanikart</h1>
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Featured Products</h2>
-        <ProductList limit={4} />
+        {/* <ProductList limit={4} /> */}
       </section>
       <section>
         <h2 className="text-2xl font-semibold mb-4">About Us</h2>
