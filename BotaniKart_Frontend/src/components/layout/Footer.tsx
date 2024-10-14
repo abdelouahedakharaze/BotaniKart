@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primary text-white py-8">
+    <footer className="bg-green-800 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2023 Botanikart. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Botanikart. All rights reserved.</p>
         </div>
       </div>
     </footer>
