@@ -6,7 +6,7 @@ import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
-import Blog from './pages/Blog'
+import BlogPage from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -24,12 +24,12 @@ function App() {
       {/* <ThemeProvider>
         <AuthProvider>
           <CartProvider> */}
-            <Layout>
+            {/* <Layout> */}
               <Routes>
                 <Route path="/" element={<Home />} />
                 {/* <Route path="/products" element={<Products />} /> */}
                 {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog" element={<BlogPage />} />
                 {/* <Route path="/blog/:id" element={<BlogPost />} /> */}
                 {/* <Route path="/cart" element={<Cart />} /> */}
                 {/* <Route path="/checkout" element={<Checkout />} /> */}
@@ -41,7 +41,7 @@ function App() {
                 {/* <Route path="/loyalty" element={<LoyaltyProgram />} /> */}
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
-            </Layout>
+            {/* </Layout> */}
           {/* </CartProvider>
         </AuthProvider>
       </ThemeProvider> */}
