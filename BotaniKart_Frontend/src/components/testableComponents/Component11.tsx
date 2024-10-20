@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Search, Calendar, User } from 'lucide-react';
 
 const blogPosts = [
-  { id: 1, title: "Top 5 Low-Maintenance Plants for Beginners", image: "/images/file_1.jpg?height=200&width=400", excerpt: "Discover the best plants for new plant parents that are both beautiful and easy to care for...", author: "Jane Doe", date: "2023-05-15", category: "Care Tips" },
-  { id: 2, title: "The Art of Bonsai: A Beginner's Guide", image: "/images/file_5.jpg?height=200&width=400", excerpt: "Learn the basics of bonsai cultivation and how to start your own miniature tree garden...", author: "John Smith", date: "2023-05-10", category: "Techniques" },
-  { id: 3, title: "Creating a Tropical Oasis in Your Living Room", image: "/images/file_7.jpg?height=200&width=400", excerpt: "Transform your living space into a lush tropical paradise with these plant selection and decor tips...", author: "Emily Johnson", date: "2023-05-05", category: "Interior Design" },
-  { id: 4, title: "The Benefits of Indoor Plants for Mental Health", image: "/images/file_2.jpg?height=200&width=400", excerpt: "Explore how incorporating plants into your indoor environment can boost mood and reduce stress...", author: "Michael Brown", date: "2023-04-30", category: "Wellness" },
-  { id: 5, title: "Sustainable Gardening: Eco-Friendly Plant Care", image: "/images/file_9.jpg?height=200&width=400", excerpt: "Discover environmentally conscious ways to care for your plants and create a sustainable indoor garden...", author: "Sarah Wilson", date: "2023-04-25", category: "Sustainability" },
+  { id: 1, title: "Top 5 Low-Maintenance Plants for Beginners", image: "/placeholder.svg?height=200&width=400", excerpt: "Discover the best plants for new plant parents that are both beautiful and easy to care for...", author: "Jane Doe", date: "2023-05-15", category: "Care Tips" },
+  { id: 2, title: "The Art of Bonsai: A Beginner's Guide", image: "/placeholder.svg?height=200&width=400", excerpt: "Learn the basics of bonsai cultivation and how to start your own miniature tree garden...", author: "John Smith", date: "2023-05-10", category: "Techniques" },
+  { id: 3, title: "Creating a Tropical Oasis in Your Living Room", image: "/placeholder.svg?height=200&width=400", excerpt: "Transform your living space into a lush tropical paradise with these plant selection and decor tips...", author: "Emily Johnson", date: "2023-05-05", category: "Interior Design" },
+  { id: 4, title: "The Benefits of Indoor Plants for Mental Health", image: "/placeholder.svg?height=200&width=400", excerpt: "Explore how incorporating plants into your indoor environment can boost mood and reduce stress...", author: "Michael Brown", date: "2023-04-30", category: "Wellness" },
+  { id: 5, title: "Sustainable Gardening: Eco-Friendly Plant Care", image: "/placeholder.svg?height=200&width=400", excerpt: "Discover environmentally conscious ways to care for your plants and create a sustainable indoor garden...", author: "Sarah Wilson", date: "2023-04-25", category: "Sustainability" },
 ];
 
 const categories = ["All", "Care Tips", "Techniques", "Interior Design", "Wellness", "Sustainability"];
@@ -23,7 +23,7 @@ export default function BlogList() {
   return (
     <div className="min-h-screen bg-olive-50 py-12">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-olive-800 mb-8 text-center">BotaniKart  Blog</h1>
+        <h1 className="text-4xl font-bold text-olive-800 mb-8 text-center">Plant Paradise Blog</h1>
         
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center">
           <div className="relative w-full md:w-64 mb-4 md:mb-0">

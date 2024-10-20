@@ -10,9 +10,9 @@ const userProfile = {
 };
 
 const orderHistory = [
-  { id: 1, date: "2024-07-01", total: 59.97, status: "Delivered" },
-  { id: 2, date: "2024-07-15", total: 34.99, status: "Shipped" },
-  { id: 3, date: "2024-07-30", total: 89.95, status: "Processing" },
+  { id: 1, date: "2023-05-01", total: 59.97, status: "Delivered" },
+  { id: 2, date: "2023-04-15", total: 34.99, status: "Shipped" },
+  { id: 3, date: "2023-03-30", total: 89.95, status: "Processing" },
 ];
 
 const wishlist = [

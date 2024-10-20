@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 import { CreditCard } from 'lucide-react';
 
-export default function CheckoutPage() {
+export default function PaymentPage() {
   const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'paypal'>('stripe');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [paypalEmail, setPaypalEmail] = useState('');
   const [showToast, setShowToast] = useState(false);
-
-  const itemsInCart = [
-    { name: 'Monstera Deliciosa', price: 30, quantity: 2 },
-    { name: 'Fiddle Leaf Fig', price: 40, quantity: 4 },
-    // Add more items as needed
-  ];
-
-  const calculateTotal = () => {
-    return itemsInCart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  };
 
   const handlePayment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,29 +21,11 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-tan p-8">
       <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-dark-brown mb-6">Checkout</h1>
-
-        {/* Summary of items */}
-        <div className="mb-6">
-          <h2 className="text-xl font-bold text-dark-brown">Order Summary</h2>
-          <ul>
-            {itemsInCart.map((item, index) => (
-              <li key={index} className="flex justify-between text-dark-green mb-2">
-                <span>{item.name} (x{item.quantity})</span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="border-t border-dark-brown mt-4 pt-2">
-            <span className="font-bold text-dark-brown">Total: </span>
-            <span className="font-bold text-dark-green">${calculateTotal()}</span>
-          </div>
-        </div>
-
+        <h1 className="text-3xl font-bold text-dark-green mb-6">Payment</h1>
         <div className="flex justify-center space-x-4 mb-6">
           <button
             className={`flex items-center px-4 py-2 rounded-full ${
-              paymentMethod === 'stripe' ? 'bg-medium-green text-white' : 'bg-light-green text-dark-brown'
+              paymentMethod === 'stripe' ? 'bg-medium-green text-white' : 'bg-light-green text-dark-green'
             }`}
             onClick={() => setPaymentMethod('stripe')}
           >
@@ -62,7 +34,7 @@ export default function CheckoutPage() {
           </button>
           <button
             className={`flex items-center px-4 py-2 rounded-full ${
-              paymentMethod === 'paypal' ? 'bg-medium-green text-white' : 'bg-light-green text-dark-brown'
+              paymentMethod === 'paypal' ? 'bg-medium-green text-white' : 'bg-light-green text-dark-green'
             }`}
             onClick={() => setPaymentMethod('paypal')}
           >
@@ -73,7 +45,6 @@ export default function CheckoutPage() {
             PayPal
           </button>
         </div>
-
         <form onSubmit={handlePayment}>
           {paymentMethod === 'stripe' ? (
             <>

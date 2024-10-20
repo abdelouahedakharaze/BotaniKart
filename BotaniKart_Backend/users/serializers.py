@@ -24,14 +24,14 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = ['store_name', 'store_description', 'paypal_email', 'paypal_client_id', 'paypal_client_secret', 'stripe_account_id']
 
 class UserSerializer(serializers.ModelSerializer):
-    addresses = AddressSerializer(many=True, read_only=True)  # Nested serializer for user addresses
-    vendor_profile = VendorSerializer(read_only=True)  # Nested serializer for vendor details (if applicable)
+    address = AddressSerializer(read_only=True)  # Changed from addresses to address
+    vendor_profile = VendorSerializer(read_only=True)
 
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'bio', 
-                  'avatar', 'birth_of_date', 'phone_number', 'addresses', 'vendor_profile']
-        read_only_fields = ['id', 'addresses', 'vendor_profile']  # Ensure certain fields are read-only
+                  'avatar', 'birth_of_date', 'phone_number', 'address', 'vendor_profile']
+        read_only_fields = ['id', 'address', 'vendor_profile']
 
 
 

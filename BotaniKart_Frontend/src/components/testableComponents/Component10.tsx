@@ -13,7 +13,7 @@ const product = {
     "Low maintenance",
     "Tropical vibes",
   ],
-  image: "/images/file_1.jpg?height=400&width=400" // Only one image
+  image: "/placeholder.svg?height=400&width=400" // Only one image
 };
 
 export default function ProductDetail() {

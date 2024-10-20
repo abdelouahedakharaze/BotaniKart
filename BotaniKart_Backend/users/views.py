@@ -109,21 +109,31 @@ class UserProfileUpdateView(generics.UpdateAPIView):
 
 class UserProfileView(generics.RetrieveAPIView):
     """
-    Retrieve the authenticated user's profile data.
+    Retrieve the authenticated user's profile data, including their address.
     """
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]  # Only authenticated users can access this view
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
-        # Returns the currently authenticated user
         return self.request.user
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+
+        # Get the user's address
+        address = Address.objects.filter(user=instance).first()
+        if address:
+            address_serializer = AddressSerializer(address)
+            data['address'] = address_serializer.data
+        else:
+            data['address'] = None
+
+        return Response(data)
     
 
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
-from .models import Address
-from .serializers import AddressSerializer
+
 
 class AddressManageView(generics.GenericAPIView):
     """

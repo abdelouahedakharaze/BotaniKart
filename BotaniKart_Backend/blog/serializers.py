@@ -6,66 +6,79 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'slug']
-        ref_name = 'BlogCategorySerializer'  # Unique ref_name
+        read_only_fields = ['slug']
+        ref_name = 'BlogCategorySerializer'
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ['id', 'name', 'slug']
-        ref_name = 'BlogTagSerializer'  # Unique ref_name
+        read_only_fields = ['slug']
 
 class CommentSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'author', 'content', 'created_at', 'updated_at', 'is_approved']
+        fields = ['id', 'author', 'content', 'created_at', 'updated_at', 'is_approved']
         read_only_fields = ['is_approved']
-        ref_name = 'BlogCommentSerializer'  # Unique ref_name
 
 class PostSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+    author = UserSerializer(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+
+    category_name = serializers.CharField(write_only=True, required=False, allow_null=True)
+    tag_names = serializers.ListField(child=serializers.CharField(), write_only=True, required=False)  # Accepting tag names
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'slug', 'content', 'author', 'category', 'tags', 'created_at', 'updated_at', 'published_at', 'is_published', 'comments']
-        read_only_fields = ['slug']
-        ref_name = 'BlogPostSerializer'  # Unique ref_name
+        fields = ['id', 'title', 'slug', 'content', 'author', 'category', 'category_name', 'tags', 'tag_names', 'created_at', 'updated_at', 'published_at', 'is_published', 'comments']
+        read_only_fields = ['slug', 'author']
 
     def create(self, validated_data):
-        tags_data = self.context['request'].data.get('tags', [])
-        category_data = self.context['request'].data.get('category')
-        
+        category_name = validated_data.pop('category_name', None)
+        tag_names = validated_data.pop('tag_names', [])  # Get tag names
+
         post = Post.objects.create(**validated_data)
-        
-        if category_data:
-            category, _ = Category.objects.get_or_create(name=category_data)
+
+        # Handle category creation or fetching by name
+        if category_name:
+            category, _ = Category.objects.get_or_create(name=category_name)
             post.category = category
-        
-        for tag_name in tags_data:
+
+        # Create or get tags by name
+        for tag_name in tag_names:
             tag, _ = Tag.objects.get_or_create(name=tag_name)
             post.tags.add(tag)
-        
+
         post.save()
         return post
 
     def update(self, instance, validated_data):
-        tags_data = self.context['request'].data.get('tags', [])
-        category_data = self.context['request'].data.get('category')
-        
+        category_name = validated_data.pop('category_name', None)
+        tag_names = validated_data.pop('tag_names', None)  # Get tag names
+
         instance = super().update(instance, validated_data)
-        
-        if category_data:
-            category, _ = Category.objects.get_or_create(name=category_data)
+
+        # Update category if a new name is provided
+        if category_name is not None:
+            category, _ = Category.objects.get_or_create(name=category_name)
             instance.category = category
-        
-        instance.tags.clear()
-        for tag_name in tags_data:
-            tag, _ = Tag.objects.get_or_create(name=tag_name)
-            instance.tags.add(tag)
-        
+
+        # Update tags by name
+        if tag_names is not None:
+            instance.tags.clear()  # Clear existing tags
+            for tag_name in tag_names:
+                tag, _ = Tag.objects.get_or_create(name=tag_name)
+                instance.tags.add(tag)
+
         instance.save()
         return instance
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['category'] = CategorySerializer(instance.category).data if instance.category else None
+        representation['tags'] = TagSerializer(instance.tags.all(), many=True).data  # Ensure .all() is called here
+        return representation

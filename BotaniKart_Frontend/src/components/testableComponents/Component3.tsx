@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Heart as HeartFilled, Heart, MessageCircle, Send } from 'lucide-react';
+import React, { useState } from 'react'
+import { Heart, MessageCircle, Send } from 'lucide-react'
 
 // Mock data for the article
 const article = {
@@ -26,54 +26,48 @@ const article = {
     <p>Remember, always use clean, sharp tools to make clean cuts and prevent the spread of disease.</p>
   `,
   author: "Maria Green",
-  date: "10/10/2024",
+  date: "May 15, 2023",
   likes: 42,
   comments: [
-    { id: 1, author: "John Doe", content: "Great article! I've been looking for pruning tips.", date: "10/15/2024" },
-    { id: 2, author: "Jane Smith", content: "This helped me a lot with my rose bushes. Thanks!", date: "10/16/2024" }
+    { id: 1, author: "John Doe", content: "Great article! I've been looking for pruning tips.", date: "May 16, 2023" },
+    { id: 2, author: "Jane Smith", content: "This helped me a lot with my rose bushes. Thanks!", date: "May 17, 2023" }
   ]
 }
 
 export default function ArticlePage() {
-  const [likes, setLikes] = useState(article.likes);
-  const [comments, setComments] = useState(article.comments);
-  const [newComment, setNewComment] = useState("");
-  const [isLiked, setIsLiked] = useState(false); // State for tracking like status
+  const [likes, setLikes] = useState(article.likes)
+  const [comments, setComments] = useState(article.comments)
+  const [newComment, setNewComment] = useState("")
 
   const handleLike = () => {
-    setIsLiked(!isLiked); // Toggle like status
-    setLikes(isLiked ? likes - 1 : likes + 1); // Adjust likes count
-  };
+    setLikes(likes + 1)
+  }
 
   const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (newComment.trim()) {
       const comment = {
         id: comments.length + 1,
-        author: "Abdeouahed",
+        author: "Current User",
         content: newComment,
         date: new Date().toLocaleDateString()
-      };
-      setComments([...comments, comment]);
-      setNewComment("");
+      }
+      setComments([...comments, comment])
+      setNewComment("")
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-olive-50 py-12">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-        <img src="/images/file_13.jpg?height=400&width=800" alt={article.title} className="w-full h-64 object-cover" />
+        <img src="/placeholder.svg?height=400&width=800" alt={article.title} className="w-full h-64 object-cover" />
         <div className="p-6">
           <h1 className="text-3xl font-bold text-olive-900 mb-4">{article.title}</h1>
           <div className="flex justify-between items-center text-olive-600 mb-6">
             <span>{article.author} • {article.date}</span>
             <div className="flex items-center space-x-4">
-              <button onClick={handleLike} className="flex items-center text-olive-700 hover:text-olive-900 transition duration-300">
-                {isLiked ? (
-                  <HeartFilled size={20} className="mr-1 text-red-500" /> // Filled heart icon
-                ) : (
-                  <Heart size={20} className="mr-1 text-olive-700" /> // Outline heart icon
-                )}
+              <button onClick={handleLike} className="flex items-center text-olive-700 hover:text-olive-900">
+                <Heart size={20} className="mr-1" />
                 {likes}
               </button>
               <span className="flex items-center">
@@ -102,7 +96,7 @@ export default function ArticlePage() {
                 className="w-full p-2 border border-olive-300 rounded-md focus:ring-olive-500 focus:border-olive-500"
                 rows={3}
               />
-              <button type="submit" className="mt-2 bg-medium-green text-white px-4 py-2 rounded-md hover:bg-dark-green transition duration-300 flex items-center">
+              <button type="submit" className="mt-2 bg-olive-600 text-white px-4 py-2 rounded-md hover:bg-olive-700 transition duration-300 flex items-center">
                 <Send size={16} className="mr-2" />
                 Post Comment
               </button>
@@ -111,5 +105,5 @@ export default function ArticlePage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
