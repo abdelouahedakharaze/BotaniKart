@@ -24,19 +24,16 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = ['store_name', 'store_description', 'paypal_email', 'paypal_client_id', 'paypal_client_secret', 'stripe_account_id']
 
 class UserSerializer(serializers.ModelSerializer):
-    """
-    Serializer for the CustomUser model.
-    
-    Serializes user information, including any related addresses, but excludes vendor-specific fields.
-    A separate VendorSerializer handles vendor details if the user is a vendor.
-    """
     addresses = AddressSerializer(many=True, read_only=True)  # Nested serializer for user addresses
     vendor_profile = VendorSerializer(read_only=True)  # Nested serializer for vendor details (if applicable)
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'bio', 'avatar', 'birth_of_date', 'phone_number', 'addresses', 'vendor_profile']
-        read_only_fields = ['id']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'bio', 
+                  'avatar', 'birth_of_date', 'phone_number', 'addresses', 'vendor_profile']
+        read_only_fields = ['id', 'addresses', 'vendor_profile']  # Ensure certain fields are read-only
+
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     """
@@ -75,16 +72,22 @@ class VendorRegistrationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Vendor
-        fields = ['store_name', 'store_description', 'paypal_email', 'paypal_client_id', 'paypal_client_secret', 'stripe_account_id']
+        fields = ['store_name', 'store_description', 'paypal_email', 
+                  'paypal_client_id', 'paypal_client_secret', 'stripe_account_id']
 
     def create(self, validated_data):
         """
         Create a Vendor profile for an existing user.
         """
         user = self.context['request'].user  # Get the current authenticated user
-        if hasattr(user, 'vendor_profile'):  # Check if the user is already a vendor
+
+        # Check if the user already has a vendor profile
+        if hasattr(user, 'vendor_profile'):
             raise serializers.ValidationError("User is already a vendor.")
-        return Vendor.objects.create(user=user, **validated_data)
+
+        # Create a new Vendor profile
+        vendor_profile = Vendor.objects.create(user=user, **validated_data)
+        return vendor_profile
 
 class UserLoginSerializer(serializers.Serializer):
     """

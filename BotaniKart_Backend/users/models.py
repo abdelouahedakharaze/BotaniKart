@@ -43,7 +43,7 @@ class Address(models.Model):
     
     This is simplified to only include key fields needed for address storage.
     """
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='addresses')
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='address')
     address_line = models.CharField(max_length=255)  # Only one address line for simplicity
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
