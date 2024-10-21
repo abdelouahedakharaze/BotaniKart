@@ -33,8 +33,8 @@ INSTALLED_APPS = [
     'users',
     'products',
     'blog',
-    # 'cart',
-    # 'orders',
+    'cart',
+    'orders',
     # 'reviews',
     # 'newsletter',
     # 'recommendations',
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # 'loyalty',
     # 'social',
     # 'utils',
-    # 'payments',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -164,13 +164,13 @@ EMAIL_HOST_USER = 'your-email@example.com'
 EMAIL_HOST_PASSWORD = 'your-email-password'
 
 # Stripe settings (replace with your actual keys)
-STRIPE_PUBLIC_KEY = 'your_stripe_public_key'
-STRIPE_SECRET_KEY = 'your_stripe_secret_key'
+STRIPE_PUBLIC_KEY = 'your_publishable_key'
+STRIPE_SECRET_KEY = 'your_secret_key'
 
 # PayPal settings (replace with your actual credentials)
-PAYPAL_CLIENT_ID = 'your_paypal_client_id'
-PAYPAL_SECRET = 'your_paypal_secret'
-
+PAYPAL_MODE = 'sandbox'  # Use 'live' for production
+PAYPAL_CLIENT_ID = 'your_client_id'
+PAYPAL_CLIENT_SECRET = 'your_client_secret'
 # Logging configuration
 LOGGING = {
     'version': 1,
