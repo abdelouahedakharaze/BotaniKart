@@ -10,9 +10,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel access
     
     # API endpoints for different apps
-    path('api/products/', include('base.urls.product_urls')),  # Product-related endpoints
-    path('api/users/', include('base.urls.user_urls')),  # User-related endpoints
-    path('api/orders/', include('base.urls.order_urls')),  # Order-related endpoints
+    path('api/products/', include('product.urls')),  # Product-related endpoints
+    path('api/users/', include('user.urls')),  # User-related endpoints
+    path('api/orders/', include('order.urls')),  # Order-related endpoints
 ]
 
 # Serving media files during development

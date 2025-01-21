@@ -21,12 +21,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'user',
+    'product',
+    'order',
+    'cart',
+    'review',
+    'blog',
     'rest_framework',
-    'corsheaders',
-    'storages',
-
-    'base.apps.BaseConfig',
+    'corsheaders',    
 ]
 
 # REST framework setup
@@ -66,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'BotaniKart_Backend.urls'
 
 # Templates setup
 TEMPLATES = [
@@ -84,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+# WSGI_APPLICATION = 'BotaniKart_Backend.wsgi.application'
 
 # Database configuration (using SQLite by default)
 DATABASES = {
@@ -131,6 +133,4 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Production specific settings
-if os.getcwd() == '/app':
-    DEBUG = False
+
