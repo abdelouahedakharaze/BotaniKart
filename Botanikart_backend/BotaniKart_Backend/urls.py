@@ -9,7 +9,9 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel access
     
-    # API endpoints for different apps
+    
+    path('api/', include('blog.urls')),
+
     path('api/products/', include('product.urls')),  # Product-related endpoints
     path('api/users/', include('user.urls')),  # User-related endpoints
     path('api/orders/', include('order.urls')),  # Order-related endpoints

@@ -1,0 +1,34 @@
+// postConstants.jsx
+
+// Post List Constants
+export const POST_LIST_REQUEST = 'POST_LIST_REQUEST';
+export const POST_LIST_SUCCESS = 'POST_LIST_SUCCESS';
+export const POST_LIST_FAIL = 'POST_LIST_FAIL';
+
+// Post Create Constants
+export const POST_CREATE_REQUEST = 'POST_CREATE_REQUEST';
+export const POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS';
+export const POST_CREATE_FAIL = 'POST_CREATE_FAIL';
+
+// Post Update Constants
+export const POST_UPDATE_REQUEST = 'POST_UPDATE_REQUEST';
+export const POST_UPDATE_SUCCESS = 'POST_UPDATE_SUCCESS';
+export const POST_UPDATE_FAIL = 'POST_UPDATE_FAIL';
+
+// Post Delete Constants
+export const POST_DELETE_REQUEST = 'POST_DELETE_REQUEST';
+export const POST_DELETE_SUCCESS = 'POST_DELETE_SUCCESS';
+export const POST_DELETE_FAIL = 'POST_DELETE_FAIL';
+
+// Comment Create Constants
+export const COMMENT_CREATE_REQUEST = 'COMMENT_CREATE_REQUEST';
+export const COMMENT_CREATE_SUCCESS = 'COMMENT_CREATE_SUCCESS';
+export const COMMENT_CREATE_FAIL = 'COMMENT_CREATE_FAIL';
+
+// Heart (Like) Toggle Constants
+export const HEART_TOGGLE_REQUEST = 'HEART_TOGGLE_REQUEST';
+export const HEART_TOGGLE_SUCCESS = 'HEART_TOGGLE_SUCCESS';
+export const HEART_TOGGLE_FAIL = 'HEART_TOGGLE_FAIL';
+export const POST_GET_REQUEST = 'POST_GET_REQUEST';
+export const POST_GET_SUCCESS = 'POST_GET_SUCCESS';
+export const POST_GET_FAIL = 'POST_GET_FAIL';
