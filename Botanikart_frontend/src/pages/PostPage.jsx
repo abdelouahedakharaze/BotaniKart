@@ -18,25 +18,27 @@ const PostPage = () => {
         dispatch(getPost(postId));
     }, [dispatch, postId]);
 
-    const submitComment = (e) => {
-      e.preventDefault();
-      if (commentText.trim()) {
-          dispatch(createComment(postId, commentText))  // Pass text directly
-              .then(() => {
-                  setCommentText('');
-                  // Refresh comments without reloading entire post
-                  dispatch(getPost(postId));
-              })
-              .catch(() => {
-                  // Handle error if needed
-              });
-      }
-  };
+    const submitComment = async (e) => {
+        e.preventDefault();
+        if (commentText.trim()) {
+            try {
+                await dispatch(createComment(postId, commentText));
+                setCommentText('');
+                dispatch(getPost(postId)); // Refresh comments
+            } catch (error) {
+                // Error handled in reducer
+            }
+        }
+    };
 
-    const handleHeart = () => {
-        dispatch(toggleHeart(postId)).then(() => {
-            dispatch(getPost(postId)); // Refresh post data
-        });
+    const handleHeart = async () => {
+        if (!userInfo) return;
+        try {
+            await dispatch(toggleHeart(postId));
+            dispatch(getPost(postId)); // Refresh heart count
+        } catch (error) {
+            // Error handled in reducer
+        }
     };
 
     return (
@@ -78,7 +80,7 @@ const PostPage = () => {
                         <div className="mb-6 flex items-center">
                             <button 
                                 onClick={handleHeart}
-                                className="flex items-center text-red-500 hover:text-red-600"
+                                className={`flex items-center ${userInfo ? 'text-red-500 hover:text-red-600' : 'text-gray-400'}`}
                                 disabled={!userInfo}
                             >
                                 <svg 
@@ -94,7 +96,7 @@ const PostPage = () => {
 
                         {/* Comments Section */}
                         <div className="border-t pt-6">
-                            <h2 className="text-xl font-semibold mb-4">Comments</h2>
+                            <h2 className="text-xl font-semibold mb-4">Comments ({post.comments?.length || 0})</h2>
 
                             {/* Comment Form */}
                             {userInfo ? (
@@ -105,13 +107,20 @@ const PostPage = () => {
                                         className="w-full p-2 border rounded mb-2"
                                         placeholder="Write a comment..."
                                         rows="3"
+                                        maxLength="500"
                                     />
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                    >
-                                        Post Comment
-                                    </button>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-500">
+                                            {500 - commentText.length} characters remaining
+                                        </span>
+                                        <button
+                                            type="submit"
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50"
+                                            disabled={!commentText.trim()}
+                                        >
+                                            Post Comment
+                                        </button>
+                                    </div>
                                 </form>
                             ) : (
                                 <div className="mb-4 text-gray-500">
@@ -123,14 +132,21 @@ const PostPage = () => {
                             {post.comments?.length > 0 ? (
                                 post.comments.map(comment => (
                                     <div key={comment.id} className="mb-4 p-3 bg-gray-50 rounded">
-                                        <p className="text-gray-600">{comment.text}</p>
-                                        <p className="text-sm text-gray-400 mt-1">
-                                            {new Date(comment.created_at).toLocaleDateString()}
-                                        </p>
+                                        <div className="flex items-center justify-between mb-1">
+                                            <span className="font-medium text-sm">
+                                                {comment.user?.username || 'Anonymous'}
+                                            </span>
+                                            <span className="text-xs text-gray-400">
+                                                {new Date(comment.created_at).toLocaleDateString()}
+                                            </span>
+                                        </div>
+                                        <p className="text-gray-600 text-sm">{comment.text}</p>
                                     </div>
                                 ))
                             ) : (
-                                <div className="text-gray-500">No comments yet</div>
+                                <div className="text-gray-500 text-center py-4">
+                                    Be the first to comment
+                                </div>
                             )}
                         </div>
                     </div>

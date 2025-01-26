@@ -38,7 +38,7 @@ export const createPost = (postData) => async (dispatch, getState) => {
 
         const { data } = await axios.post(
             'http://127.0.0.1:8000/api/posts/',
-            { ...postData, text: postData.text }, // Match serializer's text field
+            postData,
             config
         );
 
@@ -96,7 +96,7 @@ export const deletePost = (postId) => async (dispatch, getState) => {
             config
         );
 
-        dispatch({ type: POST_DELETE_SUCCESS });
+        dispatch({ type: POST_DELETE_SUCCESS, payload: postId });
     } catch (error) {
         dispatch({
             type: POST_DELETE_FAIL,
@@ -118,14 +118,14 @@ export const createComment = (postId, text) => async (dispatch, getState) => {
             },
         };
 
-        // Send as { text } instead of { commentData }
         const { data } = await axios.post(
             `http://127.0.0.1:8000/api/posts/${postId}/add_comment/`,
-            { text },  // Changed from commentData to { text }
+            { text },
             config
         );
 
         dispatch({ type: COMMENT_CREATE_SUCCESS, payload: data });
+        dispatch(getPost(postId)); // Refresh post data
     } catch (error) {
         dispatch({
             type: COMMENT_CREATE_FAIL,
@@ -147,13 +147,14 @@ export const toggleHeart = (postId) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post(
-            `http://127.0.0.1:8000/api/posts/${postId}/add_heart/`,
+        await axios.post(
+            `http://127.0.0.1:8000/api/posts/${postId}/toggle_heart/`,
             {},
             config
         );
 
-        dispatch({ type: HEART_TOGGLE_SUCCESS, payload: data });
+        dispatch({ type: HEART_TOGGLE_SUCCESS });
+        dispatch(getPost(postId)); // Refresh post data
     } catch (error) {
         dispatch({
             type: HEART_TOGGLE_FAIL,
@@ -161,6 +162,8 @@ export const toggleHeart = (postId) => async (dispatch, getState) => {
         });
     }
 };
+
+// Get Single Post
 export const getPost = (postId) => async (dispatch) => {
     try {
         dispatch({ type: POST_GET_REQUEST });
