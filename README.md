@@ -172,3 +172,11 @@ Happy Planting! 🌿
   <source src="docs/assets/profile.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+## To-Do  
+
+- [ ] Integrate PayPal payment gateway  
+- [ ] Integrate Stripe payment gateway  
+- [ ] Enhance search functionality to include:  
+  - [ ] Blog articles  
+  - [ ] Generalized search across all content
