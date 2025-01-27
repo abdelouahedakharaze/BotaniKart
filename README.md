@@ -135,18 +135,11 @@ Happy Planting! 🌿
 
 ## Demo Videos
 
-### 1. Registering and Logging In  
-<video width="720" controls>
-  <source src="docs/assets/registerlogin.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
----
 
-### 2. Searching for Products  
-### 2. Searching for Products  
-[![Watch the Search Video](https://img.youtube.com/vi/Q5iZZT_cDw8/0.jpg)](https://youtu.be/Q5iZZT_cDw8)  
-*Click the thumbnail to watch the video on YouTube.*
+### Searching for Products  
+![Search Demo](docs/assets/search.gif) 
+
 
 ## To-Do  
 
