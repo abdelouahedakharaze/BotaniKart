@@ -131,3 +131,44 @@ Tip 💡
 - API documentation is available at http://127.0.0.1:8000/swagger/
 
 Happy Planting! 🌿
+
+
+## Demo Videos
+
+### 1. Registering and Logging In  
+<video width="720" controls>
+  <source src="docs/assets/registerlogin.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+### 2. Searching for Products  
+<video width="720" controls>
+  <source src="docs/assets/search.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+### 3. Reading Blog Articles  
+<video width="720" controls>
+  <source src="docs/assets/blogreading.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+### 4. Exploring a Product Page  
+<video width="720" controls>
+  <source src="docs/assets/product.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+### 5. Managing Your Profile  
+<video width="720" controls>
+  <source src="docs/assets/profile.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
