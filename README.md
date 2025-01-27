@@ -140,6 +140,16 @@ Happy Planting! 🌿
 ### Searching for Products  
 ![Search Demo](docs/assets/search.gif) 
 
+### Register/Login Process  
+![Register/Login Demo](docs/assets/registerlogin.gif)
+
+### Product View  
+![Product Demo](docs/assets/product.gif)
+
+### Profile Settings  
+![Profile Demo](docs/assets/profile.gif)
+
+
 
 ## To-Do  
 
