@@ -1,21 +1,3 @@
 /* app.css */
 @import "tailwindcss";
 
-@theme {
-  --breakpoint-3xl: 120rem;
-}
-
-:root {
-  /* Plant Greens */
-  --plant-50: #f7faf7;
-  --plant-100: #e9f5e9;
-  --plant-500: #5fa75f;
-  --plant-700: #3c6f3c;
-  
-  /* Soil Browns */
-  --soil-50: #faf6f2;
-  --soil-300: #d9ba9f;
-  --soil-700: #8f513b;
-  --soil-800: #734334;
-  --soil-900: #5e392e;
-}

@@ -1,13 +1,12 @@
 import React from 'react'
 
-const Rating = ({ value, text, color = '#5fa75f' }) => {
-  // Safely convert value to number and format
+const Rating = ({ value, text, color = '#059669' }) => {
   const numericValue = Number(value || 0).toFixed(1)
 
   return (
     <div className="flex items-center gap-1">
       {/* Numeric Rating */}
-      <span className="text-sm font-medium text-soil-700">
+      <span className="text-sm font-medium text-emerald-900">
         {numericValue}
       </span>
 
@@ -31,8 +30,8 @@ const Rating = ({ value, text, color = '#5fa75f' }) => {
 
       {/* Reviews Count */}
       {text && (
-        <span className="ml-2 text-sm text-soil-600">
-          ({String(text).replace(' reviews', '')})
+        <span className="ml-2 text-sm text-stone-600">
+          {text} {/* Removed the string replacement */}
         </span>
       )}
     </div>
