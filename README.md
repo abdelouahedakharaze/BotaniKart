@@ -144,34 +144,9 @@ Happy Planting! 🌿
 ---
 
 ### 2. Searching for Products  
-<video width="720" controls>
-  <source src="docs/assets/search.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
----
-
-### 3. Reading Blog Articles  
-<video width="720" controls>
-  <source src="docs/assets/blogreading.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
----
-
-### 4. Exploring a Product Page  
-<video width="720" controls>
-  <source src="docs/assets/product.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
----
-
-### 5. Managing Your Profile  
-<video width="720" controls>
-  <source src="docs/assets/profile.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+### 2. Searching for Products  
+[![Watch the Search Video](https://img.youtube.com/vi/Q5iZZT_cDw8/0.jpg)](https://youtu.be/Q5iZZT_cDw8)  
+*Click the thumbnail to watch the video on YouTube.*
 
 ## To-Do  
 
