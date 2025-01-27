@@ -1,51 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-import { register } from '../actions/userActions'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import { register } from '../actions/userActions';
 
 const RegisterPage = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [message, setMessage] = useState('')
-    const dispatch = useDispatch()
-    const location = useLocation()
-    const navigation = useNavigate()
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [message, setMessage] = useState('');
 
-    const userRegister = useSelector(state => state.userRegister)
-    const { error, loading, userInfo } = userRegister
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const redirect = location.search ? location.search.split('=')[1] : '/';
+
+    const userRegister = useSelector((state) => state.userRegister);
+    const { error, loading, userInfo } = userRegister;
 
     useEffect(() => {
         if (userInfo) {
-            navigation(redirect)
+            navigate(redirect);
         }
-    }, [navigation, userInfo, redirect])
+    }, [navigate, userInfo, redirect]);
 
     const submitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (password !== confirmPassword) {
-            setMessage('Passwords do not match!')
+            setMessage('Passwords do not match!');
         } else {
-            dispatch(register(name, email, password))
+            dispatch(register(name, email, password));
         }
-    }
+    };
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-lg">
-            <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
-            
-            {message && <Message variant='danger'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
+        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+            <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">Sign Up</h1>
+
+            {message && <Message variant="danger">{message}</Message>}
+            {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
 
             <form onSubmit={submitHandler} className="space-y-4">
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
                         Name
                     </label>
                     <input
@@ -54,12 +55,12 @@ const RegisterPage = () => {
                         placeholder="Enter Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
                         Email Address
                     </label>
                     <input
@@ -68,12 +69,12 @@ const RegisterPage = () => {
                         placeholder="Enter Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
                         Password
                     </label>
                     <input
@@ -82,12 +83,12 @@ const RegisterPage = () => {
                         placeholder="Enter Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>
 
-                <div className="mb-6">
-                    <label className="block text-gray-700 text-sm font-medium mb-2">
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
                         Confirm Password
                     </label>
                     <input
@@ -96,31 +97,29 @@ const RegisterPage = () => {
                         placeholder="Confirm Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium"
+                    className="w-full py-2 px-4 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors duration-200 font-medium"
                 >
                     Register
                 </button>
             </form>
 
-            <div className="mt-6 text-center text-sm">
-                <p className="text-gray-600">
-                    Have an account?{' '}
-                    <Link 
-                        to={redirect ? `/login?redirect=${redirect}` : '/login'}
-                        className="text-blue-600 hover:underline"
-                    >
-                        Sign In
-                    </Link>
-                </p>
+            <div className="mt-6 text-center text-sm text-gray-700">
+                Have an account?{' '}
+                <Link
+                    to={redirect ? `/login?redirect=${redirect}` : '/login'}
+                    className="text-emerald-600 hover:text-emerald-700 hover:underline"
+                >
+                    Sign In
+                </Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default RegisterPage
+export default RegisterPage;

@@ -61,21 +61,21 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className="flex flex-col md:flex-row gap-8 p-6 bg-gradient-to-br from-soil-100 via-plant-200 to-soil-300 min-h-Page">
+        <div className="flex flex-col lg:flex-row gap-8 p-8 bg-gradient-to-br from-plant-100 to-plant-200 min-h-screen">
             {/* Profile Form */}
-            <div className="w-full md:w-1/3 bg-gradient-to-br from-plant-200 to-plant-400 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
-                <h2 className="text-2xl font-bold text-[var(--soil-900)] mb-6 flex items-center gap-2">User Profile 🌿</h2>
+            <div className="w-full lg:w-1/3 bg-gradient-to-br from-plant-200 to-plant-400 p-8 rounded-2xl shadow-xl transform hover:scale-105 transition-transform">
+                <h2 className="text-3xl font-extrabold text-soil-900 mb-6 flex items-center gap-2">🌱 User Profile</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {loading && <Loader />}
 
-                <form onSubmit={submitHandler} className="space-y-4">
+                <form onSubmit={submitHandler} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-soil-700 mb-2">Name</label>
+                        <label className="block text-sm font-semibold text-soil-700 mb-2">Name</label>
                         <input
                             type="text"
                             required
-                            className="w-full px-3 py-2 border border-soil-400 rounded-md focus:ring-plant-500 focus:border-plant-500"
+                            className="w-full px-4 py-3 border border-soil-400 rounded-lg focus:ring-plant-500 focus:border-plant-500"
                             placeholder="Enter Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -83,11 +83,11 @@ const ProfilePage = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-soil-700 mb-2">Email Address</label>
+                        <label className="block text-sm font-semibold text-soil-700 mb-2">Email Address</label>
                         <input
                             type="email"
                             required
-                            className="w-full px-3 py-2 border border-soil-400 rounded-md focus:ring-plant-500 focus:border-plant-500"
+                            className="w-full px-4 py-3 border border-soil-400 rounded-lg focus:ring-plant-500 focus:border-plant-500"
                             placeholder="Enter Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -95,10 +95,10 @@ const ProfilePage = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-soil-700 mb-2">Password</label>
+                        <label className="block text-sm font-semibold text-soil-700 mb-2">Password</label>
                         <input
                             type="password"
-                            className="w-full px-3 py-2 border border-soil-400 rounded-md focus:ring-plant-500 focus:border-plant-500"
+                            className="w-full px-4 py-3 border border-soil-400 rounded-lg focus:ring-plant-500 focus:border-plant-500"
                             placeholder="Enter Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -106,10 +106,10 @@ const ProfilePage = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-soil-700 mb-2">Confirm Password</label>
+                        <label className="block text-sm font-semibold text-soil-700 mb-2">Confirm Password</label>
                         <input
                             type="password"
-                            className="w-full px-3 py-2 border border-soil-400 rounded-md focus:ring-plant-500 focus:border-plant-500"
+                            className="w-full px-4 py-3 border border-soil-400 rounded-lg focus:ring-plant-500 focus:border-plant-500"
                             placeholder="Confirm Password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -118,16 +118,16 @@ const ProfilePage = () => {
 
                     <button
                         type="submit"
-                        className="w-full py-2 px-4 bg-plant-600 text-soil-100 rounded-md hover:bg-plant-700 transition-colors transform hover:scale-105"
+                        className="w-full py-3 px-4 bg-plant-600 text-soil-100 rounded-lg hover:bg-plant-700 transition-colors transform hover:scale-105"
                     >
-                        Update 🪴
+                        Update Profile 🌿
                     </button>
                 </form>
             </div>
 
             {/* Orders Table */}
-            <div className="flex-1">
-                <h2 className="text-2xl font-bold text-[var(--soil-900)] mb-6">My Orders 🛒</h2>
+            <div className="flex-1 bg-gradient-to-br from-plant-100 to-plant-200 p-8 rounded-2xl shadow-xl">
+                <h2 className="text-3xl font-extrabold text-soil-900 mb-6">🛒 My Orders</h2>
                 {loadingOrders ? (
                     <Loader />
                 ) : errorOrders ? (
@@ -137,18 +137,18 @@ const ProfilePage = () => {
                         <table className="min-w-full divide-y divide-soil-300">
                             <thead className="bg-gradient-to-br from-soil-100 to-plant-300">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900">ID</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900">Date</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900">Total</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900">Paid</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900">Delivered</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium text-soil-900"></th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900">ID</th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900">Date</th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900">Total</th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900">Paid</th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900">Delivered</th>
+                                    <th className="px-6 py-3 text-left text-sm font-semibold text-soil-900"></th>
                                 </tr>
                             </thead>
 
                             <tbody className="bg-plant-50 divide-y divide-soil-200">
                                 {orders?.map(order => (
-                                    <tr key={order._id} className="hover:bg-plant-100">
+                                    <tr key={order._id} className="hover:bg-plant-100 transition-all">
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-soil-700">{order._id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-soil-700">
                                             {new Date(order.createdAt).toLocaleDateString()}
@@ -169,7 +169,7 @@ const ProfilePage = () => {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-soil-700">
                                             <Link
                                                 to={`/order/${order._id}`}
-                                                className="px-3 py-1 bg-plant-600 text-soil-100 rounded-md hover:bg-plant-700 transition-colors transform hover:scale-105"
+                                                className="px-4 py-2 bg-plant-600 text-soil-100 rounded-lg hover:bg-plant-700 transition-colors transform hover:scale-105"
                                             >
                                                 Details
                                             </Link>

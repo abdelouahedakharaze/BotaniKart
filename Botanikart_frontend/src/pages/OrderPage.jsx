@@ -75,13 +75,13 @@ const OrderPage = () => {
         <Message variant="danger">{error}</Message>
     ) : (
         <div>
-            <h1 className="text-2xl font-semibold mb-6">Order: {order._id}</h1>
+            <h1 className="text-2xl font-semibold mb-6 text-gray-800">Order: {order._id}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white p-6 shadow-md rounded-md">
-                    <h2 className="text-xl font-semibold mb-4">Shipping</h2>
-                    <p><strong>Name: </strong>{order.user.name}</p>
-                    <p><strong>Email: </strong><a href={`mailto:${order.user.email}`} className="text-blue-600">{order.user.email}</a></p>
-                    <p><strong>Shipping: </strong>{order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalCode}, {order.shippingAddress.country}</p>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-700">Shipping</h2>
+                    <p><strong className="text-gray-700">Name: </strong>{order.user.name}</p>
+                    <p><strong className="text-gray-700">Email: </strong><a href={`mailto:${order.user.email}`} className="text-blue-600">{order.user.email}</a></p>
+                    <p><strong className="text-gray-700">Shipping: </strong>{order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalCode}, {order.shippingAddress.country}</p>
 
                     {order.isDelivered ? (
                         <Message variant="success">Delivered on {order.deliveredAt}</Message>
@@ -90,8 +90,8 @@ const OrderPage = () => {
                     )}
 
                     <div className="mt-6">
-                        <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-                        <p><strong>Method: </strong>{order.paymentMethod}</p>
+                        <h2 className="text-xl font-semibold mb-4 text-gray-700">Payment Method</h2>
+                        <p><strong className="text-gray-700">Method: </strong>{order.paymentMethod}</p>
                         {order.isPaid ? (
                             <Message variant="success">Paid on {order.paidAt}</Message>
                         ) : (
@@ -100,7 +100,7 @@ const OrderPage = () => {
                     </div>
 
                     <div className="mt-6">
-                        <h2 className="text-xl font-semibold mb-4">Order Items</h2>
+                        <h2 className="text-xl font-semibold mb-4 text-gray-700">Order Items</h2>
                         {order.orderItems.length === 0 ? (
                             <Message variant="info">Order is empty</Message>
                         ) : (
@@ -122,21 +122,21 @@ const OrderPage = () => {
                 </div>
 
                 <div className="bg-white p-6 shadow-md rounded-md">
-                    <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-700">Order Summary</h2>
                     <div className="space-y-4">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between text-gray-700">
                             <span>Items:</span>
                             <span>${order.itemsPrice}</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between text-gray-700">
                             <span>Shipping:</span>
                             <span>${order.shippingPrice}</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between text-gray-700">
                             <span>Tax:</span>
                             <span>${order.taxPrice}</span>
                         </div>
-                        <div className="flex justify-between font-semibold text-lg">
+                        <div className="flex justify-between font-semibold text-lg text-gray-800">
                             <span>Total Price:</span>
                             <span>${order.totalPrice}</span>
                         </div>

@@ -48,25 +48,43 @@ const PlaceorderPage = () => {
                 {/* Left Column */}
                 <div className="md:col-span-2 space-y-6">
                     {/* Shipping Info */}
-                    <div className="p-6 bg-white rounded-lg shadow-sm">
-                        <h2 className="text-xl font-semibold text-soil-900 mb-4">Shipping</h2>
-                        <p className="text-soil-700">
-                            {cart.shippingAddress.address}, {cart.shippingAddress.city},<br />
-                            {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
-                        </p>
+                    <div className="p-6 bg-white rounded-lg shadow-md border-2 border-stone-200">
+                        <h2 className="text-xl font-semibold text-emerald-900 mb-4">Shipping Information</h2>
+                        <div className="space-y-3">
+                            {/* Shipping Address Components */}
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">Address Line 1</h3>
+                                <p className="text-gray-600">{cart.shippingAddress.address}</p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">City</h3>
+                                <p className="text-gray-600">{cart.shippingAddress.city}</p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">Postal Code</h3>
+                                <p className="text-gray-600">{cart.shippingAddress.postalCode}</p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">Country</h3>
+                                <p className="text-gray-600">{cart.shippingAddress.country}</p>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Payment Method */}
-                    <div className="p-6 bg-white rounded-lg shadow-sm">
-                        <h2 className="text-xl font-semibold text-soil-900 mb-4">Payment Method</h2>
-                        <p className="text-soil-700">
+                    <div className="p-6 bg-white rounded-lg shadow-md border-2 border-stone-200">
+                        <h2 className="text-xl font-semibold text-emerald-900 mb-4">Payment Method</h2>
+                        <p className="text-gray-600">
                             {cart.paymentMethod}
                         </p>
                     </div>
 
                     {/* Order Items */}
-                    <div className="p-6 bg-white rounded-lg shadow-sm">
-                        <h2 className="text-xl font-semibold text-soil-900 mb-4">Order Items</h2>
+                    <div className="p-6 bg-white rounded-lg shadow-md border-2 border-stone-200">
+                        <h2 className="text-xl font-semibold text-emerald-900 mb-4">Order Items</h2>
                         {cart.cartItems.length === 0 ? (
                             <Message variant='info'>Your cart is empty</Message>
                         ) : (
@@ -83,12 +101,12 @@ const PlaceorderPage = () => {
                                         <div className="ml-4 flex-1">
                                             <Link 
                                                 to={`/product/${item.product}`}
-                                                className="text-plant-700 hover:text-plant-800 hover:underline"
+                                                className="text-amber-600 hover:text-amber-700 hover:underline"
                                             >
                                                 {item.name}
                                             </Link>
                                         </div>
-                                        <div className="ml-4 text-soil-700">
+                                        <div className="ml-4 text-gray-600">
                                             {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                         </div>
                                     </div>
@@ -100,22 +118,22 @@ const PlaceorderPage = () => {
 
                 {/* Right Column - Order Summary */}
                 <div className="h-fit sticky top-6">
-                    <div className="p-6 bg-white rounded-lg shadow-sm">
-                        <h2 className="text-xl font-semibold text-soil-900 mb-4">Order Summary</h2>
+                    <div className="p-6 bg-white rounded-lg shadow-md border-2 border-stone-200">
+                        <h2 className="text-xl font-semibold text-emerald-900 mb-4">Order Summary</h2>
                         <div className="space-y-3">
-                            <div className="flex justify-between text-soil-700">
+                            <div className="flex justify-between text-gray-600">
                                 <span>Items:</span>
                                 <span>${cart.itemsPrice}</span>
                             </div>
-                            <div className="flex justify-between text-soil-700">
+                            <div className="flex justify-between text-gray-600">
                                 <span>Shipping:</span>
                                 <span>${cart.shippingPrice}</span>
                             </div>
-                            <div className="flex justify-between text-soil-700">
+                            <div className="flex justify-between text-gray-600">
                                 <span>Tax:</span>
                                 <span>${cart.taxPrice}</span>
                             </div>
-                            <div className="flex justify-between text-soil-900 font-bold border-t pt-3">
+                            <div className="flex justify-between text-gray-900 font-bold border-t pt-3">
                                 <span>Total:</span>
                                 <span>${cart.totalPrice}</span>
                             </div>
@@ -132,7 +150,7 @@ const PlaceorderPage = () => {
                                 className={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium
                                     ${cart.cartItems.length === 0 
                                         ? 'bg-soil-300 cursor-not-allowed' 
-                                        : 'bg-plant-600 hover:bg-plant-700 text-soil-900'}
+                                        : 'bg-amber-500 hover:bg-amber-600 text-soil-900'}
                                 `}
                             >
                                 Place Order
