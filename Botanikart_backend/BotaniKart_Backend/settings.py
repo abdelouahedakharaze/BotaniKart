@@ -29,6 +29,9 @@ INSTALLED_APPS = [
     'blog',
     'rest_framework',
     'corsheaders',    
+    'drf_yasg',
+    'django_extensions',
+
 ]
 
 # REST framework setup
