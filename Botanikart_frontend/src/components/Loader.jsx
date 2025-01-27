@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div className="flex justify-center items-center h-Page">
       <div 
-        className="animate-spin rounded-full h-[100px] w-[100px] border-t-4 border-b-4 border-primary-500 mx-auto"
+        className="animate-spin rounded-full h-[100px] w-[100px] border-t-4 border-b-4 border-medium-green mx-auto"
         role="status"
       >
         <span className="sr-only">Loading...</span>
