@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'user',
     'product',
     'order',
-    'cart',
     'review',
     'blog',
     'rest_framework',

@@ -140,7 +140,7 @@ def createProductReview(request, pk):
     product.numReviews = len(reviews)
 
     total = sum(r.rating for r in reviews)
-    product.rating = total / len(reviews)
+    product.rating = total / len(reviews)+1
     product.save()
 
     return Response('Review Added')

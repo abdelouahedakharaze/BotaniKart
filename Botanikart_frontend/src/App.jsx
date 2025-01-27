@@ -17,8 +17,6 @@ import ShippingPage from './pages/ShippingPage';
 import CartPage from './pages/Cart';
 import PlaceorderPage from './pages/PlaceorderPage';
 import OrderListPage from './pages/OrderListPage';
-import UserListPage from './pages/UserListPage';
-import UserEditPage from './pages/UserEditPage';
 import ProductPage from './pages/ProductPage';
 import PaymentPage from './pages/PaymentPage';
 import OrderPage from './pages/OrderPage';
@@ -53,9 +51,7 @@ const App = () => {
           {/* Order History */}
           <Route path="/orders" element={<OrderListPage />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/userlist" element={<UserListPage />} />
-          <Route path="/admin/user/:id/edit" element={<UserEditPage />} />
+         
           
           {/* Fallback Route */}
           <Route path="*" element={<HomePage />} />
